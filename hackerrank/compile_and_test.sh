@@ -1,5 +1,9 @@
 function compile_and_test() {
     program_name=$1
+    if [ ! -d build ]; then
+        mkdir -m 775 build
+    fi
+
     g++ ${program_name}.cpp -o build/${program_name} \
         && ls -1 inputs | while read input_file_name; do
             echo "-- Testing with input from '${input_file_name}':";
