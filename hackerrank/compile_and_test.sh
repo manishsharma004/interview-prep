@@ -1,3 +1,5 @@
+#!/bin/bash
+
 function compile_and_test() {
     program_name=$1
     if [ ! -d build ]; then
