@@ -4,38 +4,6 @@ using namespace std;
 
 vector<string> split_string(string);
 
-// // Complete the minimumBribes function below.
-// void minimumBribes(vector<int> q) {
-
-//     // vector<int> position_map(q.size());
-
-//     // for(int i=0; i<q.size(); ++i) {
-//     //     position_map[q[i]] = q[i];
-//     // }
-
-//     int num_bribes = 0;
-//     bool impossible = false;
-
-//     for(int i=0; i<q.size(); ++i) {
-//         int position_difference = q[i] - (i+1);
-
-//         if (position_difference > 2) {
-//             impossible = true;
-//             break;
-//         }
-
-//         if (position_difference > 0) {
-//             num_bribes += position_difference;
-//         }
-//     }
-
-//     if (impossible) {
-//         cout << "Too chaotic" << endl;
-//     } else {
-//         cout << num_bribes << endl;
-//     }
-// }
-
 int swap(int &a, int &b) {
     a = a ^ b;
     b = a ^ b;
@@ -57,8 +25,6 @@ void print_vector(vector<int> vec) {
 
 // Complete the minimumBribes function below.
 void minimumBribes(vector<int> q) {
-    // cout << "input: ";
-    // print_vector(q);
     bool impossible = false;
 
     int displacement_count[q.size()] = {0};
@@ -75,17 +41,12 @@ void minimumBribes(vector<int> q) {
 
                 if (displacement_count[current-1] > 2) {
                     impossible = true;
-                    // cout << "----IMPOSSIBLE CASE----" << endl;
                     break;
                 }
                 changed = true;
                 ++i;
             }
         }
-        // cout << "vector:             ";
-        // print_vector(q);
-        // cout << "displacement array: ";
-        // print_array(displacement_count, q.size());
     }
 
     if (impossible) {
