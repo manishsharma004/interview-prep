@@ -4,7 +4,7 @@ using namespace std;
 
 vector<string> split_string(string);
 
-int swap(int &a, int &b) {
+void swap(int &a, int &b) {
     a = a ^ b;
     b = a ^ b;
     a = a ^ b;
