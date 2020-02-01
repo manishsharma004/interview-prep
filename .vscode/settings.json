@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "*.tcc": "cpp",
+        "type_traits": "cpp",
+        "string": "cpp",
+        "istream": "cpp",
+        "numeric": "cpp"
+    },
+    "python.pythonPath": "/data/git/interview/pyenv.3.6/bin/python3.6"
+}
