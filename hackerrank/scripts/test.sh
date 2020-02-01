@@ -61,7 +61,8 @@ for language in "${languages[@]}"; do
     fi
   fi
   if [ $language == ruby ]; then
-    filename="${program_name}.rb"
+    ruby_program_name=`echo "$program_name" | sed -r 's/(-)([a-z])/_\2/g'`
+    filename="${ruby_program_name}.rb"
     if [[ -f $filename ]]; then
       bash test_ruby.sh
     else

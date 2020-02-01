@@ -48,10 +48,10 @@ for language in "${languages[@]}"; do
     touch "$filename"
 
     echo 'public class '${java_program_name}' {
-    public static void main(String[] args) {
-      System.out.printf("'${java_program_name}' java program\n");
-    }
-  }' >> "$filename"
+  public static void main(String[] args) {
+    System.out.printf("'${java_program_name}' java program\n");
+  }
+}' >> "$filename"
   fi
 
   if [ $language == cpp ]; then
@@ -59,10 +59,10 @@ for language in "${languages[@]}"; do
     touch $filename
     echo '#include<iostream>
 
-  int main() {
-      std::cout << "'${program_name}' cpp program" << std::endl;
-      return 0;
-  }' >> $filename
+int main() {
+    std::cout << "'${program_name}' cpp program" << std::endl;
+    return 0;
+}' >> $filename
   fi
 
   if [ $language == python ]; then
@@ -70,11 +70,12 @@ for language in "${languages[@]}"; do
     touch $filename
     echo "#!/usr/bin/env python
 
-  print('${program_name} python program')" >> $filename
+print('${program_name} python program')" >> $filename
   fi
 
   if [ $language == ruby ]; then
-    filename="${program_name}/${program_name}.rb"
+    ruby_program_name=`echo "$program_name" | sed -r 's/(-)([a-z])/_\2/g'`
+    filename="${program_name}/${ruby_program_name}.rb"
     touch $filename
     echo "# frozen_string_literal: true
 
