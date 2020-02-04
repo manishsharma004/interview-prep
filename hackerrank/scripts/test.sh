@@ -5,7 +5,7 @@ then
 	program_name=`basename "$PWD"`
 fi
 
-languages="java,python,ruby,cpp"
+languages="java,python,ruby,cpp,cs,js"
 
 print_help() {
   echo "USAGE:
@@ -34,39 +34,42 @@ parse_arguments $@
 # Split languages comma separated string into individual languages
 IFS=\, read -a languages <<<"$languages"
 
+run_file() {
+  _filename=$1
+  _language=$2
+  if [[ -f $_filename ]]; then
+    bash test_${_language}.sh
+  else
+    echo $_filename not present
+  fi
+}
+
 for language in "${languages[@]}"; do
   if [ $language == java ]; then
     java_program_name=`echo "$program_name" | awk -F"-" '{for(i=1;i<=NF;i++){$i=toupper(substr($i,1,1)) substr($i,2)}} 1' OFS=""`
     filename="${java_program_name}.java"
-    if [[ -f $filename ]]; then
-      bash test_java.sh
-    else
-      echo $filename not present
-    fi
+    run_file "$filename" $language
   fi
   if [ $language == cpp ]; then
     filename="${program_name}.cpp"
-    if [[ -f $filename ]]; then
-      bash test_cpp.sh
-    else
-      echo $filename not present
-    fi
+    run_file "$filename" $language
   fi
   if [ $language == python ]; then
     filename="${program_name}.py"
-    if [[ -f $filename ]]; then
-      bash test_python.sh
-    else
-      echo $filename not present
-    fi
+    run_file "$filename" $language
   fi
   if [ $language == ruby ]; then
     ruby_program_name=`echo "$program_name" | sed -r 's/(-)([a-z])/_\2/g'`
     filename="${ruby_program_name}.rb"
-    if [[ -f $filename ]]; then
-      bash test_ruby.sh
-    else
-      echo $filename not present
-    fi
+    run_file "$filename" $language
+  fi
+  if [ $language == cs ]; then
+    cs_program_name=`echo "$program_name" | awk -F"-" '{for(i=1;i<=NF;i++){$i=toupper(substr($i,1,1)) substr($i,2)}} 1' OFS=""`
+    filename="${cs_program_name}.cs"
+    run_file "$filename" $language
+  fi
+  if [ $language == js ]; then
+    filename="${program_name}.js"
+    run_file "$filename" $language
   fi
 done
